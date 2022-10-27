@@ -37,7 +37,7 @@ N = 2,300, unpruned set of SNPs (\~6M SNPs) and 90 traits.
 
 ------------------------------------------------------------------------
 
-1.  **Make all files in the code directory executable**  
+2.  **Make all files in the code directory executable**  
     This is the directory that contains the GWAS scripts
 
 ``` bash
@@ -47,7 +47,7 @@ chmod +x /projects/ps-palmer/apurva/genetic_analysis/code
 
 ------------------------------------------------------------------------
 
-1.  **Create directory structure**  
+3.  **Create directory structure**  
     This will create the directory structure for the project
     *p50_david_dietz_2020*
 
@@ -57,7 +57,7 @@ chmod +x /projects/ps-palmer/apurva/genetic_analysis/code
 
 ------------------------------------------------------------------------
 
-1.  **Copy csv file with raw phenotypes and trait descriptions to
+4.  **Copy csv file with raw phenotypes and trait descriptions to
     data/raw_data**  
 
 -   Ideally, we’d like to query the **gwas_phenotypes** and the
@@ -96,7 +96,7 @@ pheno_processing_summary/covs folder**
 
 ------------------------------------------------------------------------
 
-1.  **Subset genotype data and calculate GRM, SNP h2 estimates**  
+5.  **Subset genotype data and calculate GRM, SNP h2 estimates**  
 
 -   *genotype_filters_on_vcf.sh* This will prepare the genotype data for
     GWAS. If we’re planning to get the PLINK binary file as an output of
