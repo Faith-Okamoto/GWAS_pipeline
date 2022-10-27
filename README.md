@@ -112,8 +112,8 @@ pheno_processing_summary/covs folder**
     will be used for *–mlma-subtract-grm* option designed to parallelise
     the MLMA-LOCO analysis for large data set.  
     *More info*:
-    <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis> -
-    *LZ_prep.sh* detailed steps for preparing the locuszoom backend
+    <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis>   
+-  *LZ_prep.sh* detailed steps for preparing the locuszoom backend
     SQLite database are outlined in this document:
     <https://www.dropbox.com/s/2ugc710e2sp9v98/locuszoom_standalone_instructions.pdf?dl=0>
 
