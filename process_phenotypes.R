@@ -23,7 +23,6 @@ normf<- function(x){
 
 
 
-setwd("/home/apurva/Dropbox (Palmer Lab)/genetic_analysis/p50_david_dietz_2020/")
 
 
 raw=read.csv("data/raw_data/raw_data.csv",header=T,stringsAsFactors = F,na.strings=c("","NA"))
