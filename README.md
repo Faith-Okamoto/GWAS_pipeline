@@ -133,7 +133,7 @@ qsub -q condo -W depend=afterok:$all_grm -l nodes=1:ppn=2 -l walltime=1:00:00 /p
     perform mapping.  
     *More info*:
     <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis>  
-    -I’ve included 2 options for submitting GWAS jobs in the
+   -I’ve included 2 options for submitting GWAS jobs in the
     **all_commands.sh** file.  
     -Option 2 is better since it’s easier to manage array jobs. -Option
     2 requires phenotypes.txt file in the data directory.
