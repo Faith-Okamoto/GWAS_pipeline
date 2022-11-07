@@ -19,7 +19,7 @@ else
 	mkdir -p ./code
 	mkdir -p ./log
 	#fix this
-	mkdir -p ./temp/conditional_analysis,r2,metal
+	mkdir -p ./temp/{conditional_analysis,r2,metal}
 	mkdir -p ./genotypes/dosages
 	mkdir -p ./grm
 
