@@ -40,7 +40,6 @@ raw$rfid <- as.character(raw$rfid)
 load("data/raw_data/traits.RData")
 
 
-traits
 
 #raw<-raw %>%
 #  mutate_if(is.character, str_trim)
@@ -82,7 +81,7 @@ for(l in 1:length(centers)){
       
     }
     
-    qnormed_sex_data_all[[j]] <-Reduce(function(dtf1, dtf2) merge(dtf1, dtf2, by = "rfid", all.x = TRUE),
+    qnormed_sex_data_all[[j]] <-Reduce(function(dtf1, dtf2) merge(dtf1, dtf2, by = "rfid", all = TRUE),
                                        qnormed_data_each_trait)
     
   }  
