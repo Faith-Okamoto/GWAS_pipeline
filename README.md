@@ -133,10 +133,10 @@ qsub -q condo -W depend=afterok:$all_grm -l nodes=1:ppn=2 -l walltime=1:00:00 /p
     perform mapping.  
     *More info*:
     <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis>  
-   -I’ve included 2 options for submitting GWAS jobs in the
+-   I’ve included 2 options for submitting GWAS jobs in the
     **all_commands.sh** file.  
-    -Option 2 is better since it’s easier to manage array jobs. -Option
-    2 requires phenotypes.txt file in the data directory.
+-   Option 2 is better since it’s easier to manage array jobs. 
+-   Option 2 requires phenotypes.txt file in the data directory.
     **create_array_files.R** will create this file.
 
 ``` bash
@@ -153,23 +153,18 @@ gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 
 ------------------------------------------------------------------------
 
 7.  **Annotate and visualize GWAS results**  
-    -I’ve included 2 options for submitting GWAS jobs in the
-    **all_commands.sh** file.  
-    -Option 2 is better since it’s easier to manage array jobs. -Option
-    2 requires phenotypes.txt file in the data directory.
-    **create_array_files.R** will create this file.  
 -   All downstream steps in the pipeline are dependent on the completion
     of the GWAS jobs.  
 -   These include: prepping PheWAS database, calling QTLs, submitting
     Manhattan plot jobs, creating regional association plots (Locuszoom)
     etc.  
-    -Algorithm for calling QTLs (calling_qtls_manyTraits_subtractGRM.sh)
+-   Algorithm for calling QTLs (calling_qtls_manyTraits_subtractGRM.sh)
     is described in Genetic mapping section of this paper:
     <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7511439/>  
-    -If the algorithm for calling QTLs, calls multiple QTLs on the same
+-   If the algorithm for calling QTLs, calls multiple QTLs on the same
     chromosome, then we perform conditional analysis to establish
     independence.  
-    -*table3.R* : This script annotates the QTLs. (Defines LD r2 based
+-   *table3.R* : This script annotates the QTLs. (Defines LD r2 based
     intervals, gets genes from Rat Genome Database, adds Strain
     Distribution Pattern (SDP) for HS founders
 -   We used SnpEff to perform variant annotation.
@@ -177,14 +172,11 @@ gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 
 ------------------------------------------------------------------------
 
 8.  **Compress images, knit report and create minio public link**  
-    -I convert the Locuszoom PDFs to png and compress the Manhattan
+-   I convert the Locuszoom PDFs to png and compress the Manhattan
     plots using command-line tools.  
-    -After knitting the report, copy the
-    html file to the **/projects/ps-palmer/s3/data/** directory.
-    p50_reports = directory for all P50 projects. u01_reports = U01
-    projects.  
-    -Please follow the pinned document on TSCC channel for
-    minio access key.
+-   After knitting the report, copy the html file to the **/projects/ps-palmer/s3/data/** directory.
+    p50_reports = directory for all P50 projects. u01_reports = U01 projects.  
+-   Please follow the pinned document on TSCC channel for minio access key.
 
 ``` bash
 convert_locuszoom_to_png.sh
