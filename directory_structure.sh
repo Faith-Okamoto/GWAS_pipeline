@@ -18,7 +18,8 @@ else
 	mkdir -p ./pheno_processing_summary/{plots/{age,traits},age,covs,misc,N}
 	mkdir -p ./code
 	mkdir -p ./log
-	mkdir -p ./temp/conditional_analysis
+	#fix this
+	mkdir -p ./temp/conditional_analysis,r2,metal
 	mkdir -p ./genotypes/dosages
 	mkdir -p ./grm
 
