@@ -157,8 +157,7 @@ gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 
     **all_commands.sh** file.  
     -Option 2 is better since it’s easier to manage array jobs. -Option
     2 requires phenotypes.txt file in the data directory.
-    **create_array_files.R** will create this file.
-
+    **create_array_files.R** will create this file.  
 -   All downstream steps in the pipeline are dependent on the completion
     of the GWAS jobs.  
 -   These include: prepping PheWAS database, calling QTLs, submitting
@@ -179,10 +178,12 @@ gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 
 
 8.  **Compress images, knit report and create minio public link**  
     -I convert the Locuszoom PDFs to png and compress the Manhattan
-    plots using command-line tools. -After knitting the report, copy the
+    plots using command-line tools.  
+    -After knitting the report, copy the
     html file to the **/projects/ps-palmer/s3/data/** directory.
     p50_reports = directory for all P50 projects. u01_reports = U01
-    projects -Please follow the pinned document on TSCC channel for
+    projects.  
+    -Please follow the pinned document on TSCC channel for
     minio access key.
 
 ``` bash
