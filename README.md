@@ -1,17 +1,11 @@
-# GWAS_pipeline
 Within this pipeline, the following software is used:
 
 • PLINK v1.90p 64-bit (2 Jun 2015) gcta-1.94.1
 
 • R version 4.1.2
 
-R packages used can be installed using conda:
-
-library(plyr)  
-library(ggplot2)  
-library(ggpubr)  
-library(broom)  
-library(chron)
+R packages used can be installed using conda.  
+Please contact Faith Okamoto for R libraries and other dependencies
 
 ------------------------------------------------------------------------
 
@@ -112,8 +106,8 @@ pheno_processing_summary/covs folder**
     will be used for *–mlma-subtract-grm* option designed to parallelise
     the MLMA-LOCO analysis for large data set.  
     *More info*:
-    <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis>   
--  *LZ_prep.sh* detailed steps for preparing the locuszoom backend
+    <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis> -
+    *LZ_prep.sh* detailed steps for preparing the locuszoom backend
     SQLite database are outlined in this document:
     <https://www.dropbox.com/s/2ugc710e2sp9v98/locuszoom_standalone_instructions.pdf?dl=0>
 
@@ -132,3 +126,82 @@ qsub -q condo -W depend=afterok:$all_grm -l nodes=1:ppn=2 -l walltime=1:00:00 /p
 ```
 
 ------------------------------------------------------------------------
+
+6.  **Submit GWAS jobs**  
+
+-   We’re using MLMA-LOCO analysis for large data sets in GCTA to
+    perform mapping.  
+    *More info*:
+    <https://gcta.freeforums.net/thread/173/mixed-linear-model-association-analysis>  
+    -I’ve included 2 options for submitting GWAS jobs in the
+    **all_commands.sh** file.  
+    -Option 2 is better since it’s easier to manage array jobs. -Option
+    2 requires phenotypes.txt file in the data directory.
+    **create_array_files.R** will create this file.
+
+``` bash
+#example command
+#gcta64 --mlma --grm test_all --mlma-subtract-grm test_chr1 --bfile test --chr 1 --pheno test.phen --out test_loco_chr1 --thread-num 10
+
+##This will create phenotypes.txt file required to submit an array job
+Rscript create_array_files.R
+
+num_phenos=`wc -l < data/phenotypes.txt`
+gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 /projects/ps-palmer/apurva/genetic_analysis/code/gwas_loco_array.sh`
+```
+
+------------------------------------------------------------------------
+
+7.  **Annotate and visualize GWAS results**  
+    -I’ve included 2 options for submitting GWAS jobs in the
+    **all_commands.sh** file.  
+    -Option 2 is better since it’s easier to manage array jobs. -Option
+    2 requires phenotypes.txt file in the data directory.
+    **create_array_files.R** will create this file.
+
+-   All downstream steps in the pipeline are dependent on the completion
+    of the GWAS jobs.  
+-   These include: prepping PheWAS database, calling QTLs, submitting
+    Manhattan plot jobs, creating regional association plots (Locuszoom)
+    etc.  
+    -Algorithm for calling QTLs (calling_qtls_manyTraits_subtractGRM.sh)
+    is described in Genetic mapping section of this paper:
+    \_<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7511439/_>  
+    -If the algorithm for calling QTLs, calls multiple QTLs on the same
+    chromosome, then we perform conditional analysis to establish
+    independence.  
+    -*table3.R* : This script annotates the QTLs. (Defines LD r2 based
+    intervals, gets genes from Rat Genome Database, adds Strain
+    Distribution Pattern (SDP) for HS founders
+-   We used SnpEff to perform variant annotation.
+
+------------------------------------------------------------------------
+
+8.  **Compress images, knit report and create minio public link**  
+    -I convert the Locuszoom PDFs to png and compress the Manhattan
+    plots using command-line tools. -After knitting the report, copy the
+    html file to the **/projects/ps-palmer/s3/data/** directory.
+    p50_reports = directory for all P50 projects. u01_reports = U01
+    projects -Please follow the pinned document on TSCC channel for
+    minio access key.
+
+``` bash
+convert_locuszoom_to_png.sh
+#I converted LZ PDFs locally using pdftoppm. Found the following package that looks like a wrapper around pdftoppm. 
+#can be installed using conda
+#try https://anaconda.org/conda-forge/pdf2image
+
+
+#compress manhattan plots Done locally on my Desktop 
+compress_manhattan_plots.sh
+
+#knit report on the cluster
+#currently knitting the Rmd locally
+p50_david_dietz_2020.Rmd
+
+
+#copy the html file to the /projects/ps-palmer/s3/data/ directory
+#This will generate web-link for the report
+./mc anonymous set public minio/p50_reports --recursive
+./mc anonymous links minio/p50_reports --recursive
+```
