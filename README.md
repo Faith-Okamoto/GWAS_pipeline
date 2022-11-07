@@ -166,7 +166,7 @@ gwas_jobs=`qsub -q hotel -t 1-$num_phenos -l nodes=1:ppn=5 -l walltime=10:00:00 
     etc.  
     -Algorithm for calling QTLs (calling_qtls_manyTraits_subtractGRM.sh)
     is described in Genetic mapping section of this paper:
-    \_<https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7511439/_>  
+    <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7511439/>  
     -If the algorithm for calling QTLs, calls multiple QTLs on the same
     chromosome, then we perform conditional analysis to establish
     independence.  
