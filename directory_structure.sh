@@ -13,15 +13,13 @@ else
     
     cd $project_name
 
-	mkdir -p ./results/{eqtl,phewas,manhattan_plots,qtls,locuszoom_plots,heritability,genetic_correlation}
+	mkdir -p ./results/{eqtl,phewas,gwas,manhattan_plots,qtls,locuszoom_plots,heritability,genetic_correlation}
 	mkdir -p ./data/{raw_data,pheno,residuals,gwas_jobs}
 	mkdir -p ./pheno_processing_summary/{plots/{age,traits},age,covs,misc,N}
 	mkdir -p ./code
 	mkdir -p ./log
-	#fix this
-	mkdir -p ./temp/{conditional_analysis,r2,metal}
-	mkdir -p ./genotypes/dosages
-	mkdir -p ./grm
+	mkdir -p ./temp/{assoc,code,pbs_log,pheno,r2,conditional_analysis}
+	mkdir -p ./genotypes/{grm,dosages}
 
 
 echo "Directory structure created"
