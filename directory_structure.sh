@@ -20,6 +20,7 @@ else
 	mkdir -p ./log
 	mkdir -p ./temp/{assoc,code,pbs_log,pheno,r2,conditional_analysis}
 	mkdir -p ./genotypes/{grm,dosages}
+	mkdir -p ./grm
 
 
 echo "Directory structure created"
