@@ -50,15 +50,15 @@ for(k in 1:length(d1)){
 
 
 
-for(k in 2:4){
-  array_index<-nrow(total_gwas_jobs_df[which(total_gwas_jobs_df$pheno %in% d1[[k]]),])
-  system(paste0("qsub -q hotel -t 1-",array_index," -l nodes=1:ppn=4 -l walltime=3:00:00 -N gwas_",k," -o gwas_",k,".log -v pheno_file=",k," /projects/ps-palmer/apurva/genetic_analysis/code/gwas_array_jobs.sh"))
-}
-
-for(k in 6:8){
-  array_index<-nrow(total_gwas_jobs_df[which(total_gwas_jobs_df$pheno %in% d1[[k]]),])
-  system(paste0("qsub -q condo -t 1-",array_index," -l nodes=1:ppn=4 -l walltime=3:00:00 -N gwas_",k," -o gwas_",k,".log -v pheno_file=",k," /projects/ps-palmer/apurva/genetic_analysis/code/gwas_array_jobs.sh"))
-}
+#for(k in 2:4){
+#  array_index<-nrow(total_gwas_jobs_df[which(total_gwas_jobs_df$pheno %in% d1[[k]]),])
+#  system(paste0("qsub -q hotel -t 1-",array_index," -l nodes=1:ppn=4 -l walltime=3:00:00 -N gwas_",k," -o gwas_",k,".log -v pheno_file=",k," /projects/ps-palmer/apurva/genetic_analysis/code/gwas_array_jobs.sh"))
+#}
+#
+#for(k in 6:8){
+#  array_index<-nrow(total_gwas_jobs_df[which(total_gwas_jobs_df$pheno %in% d1[[k]]),])
+#  system(paste0("qsub -q condo -t 1-",array_index," -l nodes=1:ppn=4 -l walltime=3:00:00 -N gwas_",k," -o gwas_",k,".log -v pheno_file=",k," /projects/ps-palmer/apurva/genetic_analysis/code/gwas_array_jobs.sh"))
+#}
 
 
 
